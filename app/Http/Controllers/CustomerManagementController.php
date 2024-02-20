@@ -63,4 +63,12 @@ class CustomerManagementController extends Controller
             'message' => 'Money transferred successfully',
         ]);
     }
+
+    public function view_account(Request $request, $account_number){
+        $account = BankAccount::where('account_number', $account_number)->first();
+
+        return response([
+            'account' => $account,
+        ]);
+    }
 }
