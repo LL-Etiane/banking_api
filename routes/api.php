@@ -8,6 +8,7 @@ use App\Http\Controllers\Auth\NewPasswordController;
 use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\VerifyEmailController;
+use App\Http\Controllers\CustomerManagementController;
 
 Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
     return $request->user();
@@ -32,3 +33,6 @@ Route::post('/email/verification-notification', [EmailVerificationNotificationCo
 Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])
     ->middleware('auth:sanctum')
     ->name('logout');
+
+Route::get('/customer/{user_id}', [CustomerManagementController::class, 'view_customer'])->middleware(['auth:sanctum','role:employee'])->name('view_customer');
+Route::post('/transfer', [CustomerManagementController::class, 'transfer_money'])->middleware(['auth:sanctum','role:employee'])->name('transfer_money');

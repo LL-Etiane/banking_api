@@ -19,4 +19,14 @@ class BankAccount extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function debit_transactions()
+    {
+        return $this->hasMany(Transactions::class, 'debit');
+    }
+
+    public function credit_transactions()
+    {
+        return $this->hasMany(Transactions::class, 'credit');
+    }
 }
