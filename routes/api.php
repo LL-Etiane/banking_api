@@ -35,6 +35,7 @@ Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])
     ->name('logout');
 
 Route::get('/customer/{user_id}', [CustomerManagementController::class, 'view_customer'])->middleware(['auth:sanctum','role:employee'])->name('view_customer');
+Route::post('/customer/{user_id}/account', [CustomerManagementController::class, 'add_account'])->middleware(['auth:sanctum','role:employee'])->name('add_account');
 Route::post('/transfer', [CustomerManagementController::class, 'transfer_money'])->middleware(['auth:sanctum','role:employee'])->name('transfer_money');
 Route::get('/account/{account_number}', [CustomerManagementController::class, 'view_account'])->middleware(['auth:sanctum','role:employee'])->name('view_account');
 Route::get('/account/{account_number}/transactions', [CustomerManagementController::class, 'view_account_transactions'])->middleware(['auth:sanctum','role:employee'])->name('view_account_transactions');

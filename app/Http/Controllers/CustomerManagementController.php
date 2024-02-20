@@ -17,6 +17,23 @@ class CustomerManagementController extends Controller
         ]);
     }
 
+    public function add_account(Request $request, $user_id)
+    {
+        $user = User::findOrfail($user_id);
+        $request->validate([
+            'initial_balance' => 'required|numeric|min:0',
+        ]);
+
+        $account = $user->bank_accounts()->create([
+            'account_number' => rand(1000000000, 9999999999),
+            'balance' => $request->initial_balance,
+        ]);
+
+        return response([
+            'account' => $account,
+        ]);
+    }
+
     /**
      * Transfer money between accounts by an employee of the bank
      */
