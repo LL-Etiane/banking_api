@@ -15,8 +15,14 @@ class Transactions extends Model
         'amount',
     ];
 
-    public function from_account(){
-        return $this->belongsTo(BankAccount::class, 'from_account');
+    public function debit_account()
+    {
+        return $this->belongsTo(BankAccount::class, 'debit');
+    }
+
+    public function credit_account()
+    {
+        return $this->belongsTo(BankAccount::class, 'credit');
     }
 
 }
